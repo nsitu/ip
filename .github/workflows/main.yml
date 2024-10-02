@@ -4,31 +4,18 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-and-deploy:
+  deploy-to-caprover:
     runs-on: ubuntu-latest 
 
     steps:
       - uses: actions/checkout@v4 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies  # see also, package.json
-        run: npm install
-
-      - name: Build with Vite
-        run: npm run build    # i.e. "vite build"
-
-      - name: Include Dockerfile and CapRover configuration
-        run: cp Dockerfile dist/ && cp captain-definition dist/
 
       # Make a tarball of the dist/ folder for deployment
       # and also include the Dockerfile and CapRover configuration
       - uses: a7ul/tar-action@v1.2.0
         with:
           command: c      # "c" means "create" (new tarball)
-          cwd: "./dist"  
+          cwd: "./"  
           files: |
             ./ 
           outPath: deploy.tar
