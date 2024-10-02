@@ -5,7 +5,7 @@ app.use('/',express.static('./public'))
 
 
 app.get("/ip", (req, res) => { 
-    res.send(req) 
+    res.send(req.headers) 
 }); 
 
 app.get("/api/datetime", (req, res) => { 
